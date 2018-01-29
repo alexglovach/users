@@ -7,7 +7,7 @@ class TableController extends BaseController
 {
     public function allTables()
     {
-        $this->template = 'allTables.html';
+        $this->template = 'loginWindow.html';
         $list = $this->tablesListModel->getList();
         if(!count($list)){
             $list[0] = "Database have no table";

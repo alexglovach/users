@@ -1,0 +1,15 @@
+<div class="center-block col-md-4" style="float:none;text-align: center;">
+    <h2>Login window:</h2>
+    <form action="/login" method="post" style="width: 100%;">
+        {% if loginError %}
+        <p style="color: red;">{{ loginError }}</p>
+        {% endif %}
+        <input type="text" name="nickname" class="form-control input-group" placeholder="Nickname" required>
+        <br>
+        <input type="password" name="password" class="form-control input-group" placeholder="Password" required>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Enter" style="width: 100%;">
+    </form>
+    <a href="/registration">New user</a>
+
+</div>
