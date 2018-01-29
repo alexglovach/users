@@ -14,17 +14,10 @@
             die("Error: ".$e->getMessage());
         }
     },
-
-    'tableModel' => function ($env, $container) {
-        return new \App\Models\TableModel($container);
+    'registrationModel' => function($env, $container){
+        return new \App\Models\RegistrationModel($container);
     },
-
-    'tablesListModel' => function ($env, $container) {
-        return new \App\Models\TablesListModel($container);
-    },
-
-
-    'queryModel' => function ($env, $container) {
-        return new \App\Models\QueryModel($container);
-    },
+    'loginModel' => function($env, $container){
+    return new \App\Models\LoginModel($container);
+}
 ];

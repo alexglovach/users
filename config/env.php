@@ -2,7 +2,7 @@
     'mysql' => [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'database' => 'test_vk_parser',
+        'database' => 'users',
         'charset' => 'utf8',
         'username' => 'root',
         'password' => 'root',
