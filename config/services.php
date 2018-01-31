@@ -17,7 +17,10 @@
     'registrationModel' => function($env, $container){
         return new \App\Models\RegistrationModel($container);
     },
-    'loginModel' => function($env, $container){
-    return new \App\Models\LoginModel($container);
-}
+    'loginModel' => function($env, $container) {
+        return new \App\Models\LoginModel($container);
+    },
+    'accountModel' => function($env, $container){
+        return new \App\Models\AccountModel($container);
+    }
 ];

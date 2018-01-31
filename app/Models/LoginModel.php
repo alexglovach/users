@@ -5,5 +5,13 @@ namespace App\Models;
 
 class LoginModel extends BaseModel
 {
-    return 'ok';
+    function loginCheck($nickname,$password){
+        $password = md5($password);
+        $stmt = $this->connection->prepare("SELECT EXISTS(SELECT * FROM `users_table` WHERE `nickname` = :nickname AND 
+`password` = :password)");
+        $stmt->bindParam(':nickname',$nickname);
+        $stmt->bindParam(':password',$password);
+        $stmt->execute();
+        return $stmt->fetchAll()[0][0];
+    }
 }

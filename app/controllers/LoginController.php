@@ -20,8 +20,12 @@ class LoginController extends BaseController
         $password = isset($this->body['password']) ? $this->body['password'] : false;
         $loginError = false;
         if($nickname && $password){
-            var_dump('go to database');
-            var_dump('go to next page');
+           if($this->loginModel->loginCheck($nickname,$password)){
+               header("Location: /account/$nickname");
+               exit;
+           }else{
+               $loginError = "Please, enter correct nickname or password";
+           }
         }elseif (!$nickname && $password){
             $loginError = "Please, enter nickname";
         }elseif ($nickname && !$password){
