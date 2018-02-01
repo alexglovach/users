@@ -25,12 +25,33 @@ class AccountController extends BaseController
         return $this->accountPageRender($this->data);
     }
     public function accountPageRender($data){
-        return [
-            'AccountName' => $data["nickname"],
-            'AccountFirstName' => $data["firstname"],
-            'AccountLastName' => $data["lastname"],
-            'AccountAge' => $data["age"],
-            'AccountSearchResult' => $data['searchResult'],
-        ];
+        if(!$data['nickname']){
+            header("Location: /404");
+        }
+        $userChecked = false;
+        if(isset($_COOKIE['user'])) {
+            $userCookie = explode(',),', base64_decode($_COOKIE['user']));
+            $userChecked = $this->loginModel->cookiesCheck($userCookie[0],$userCookie[1]);
+        }
+        if($userChecked){
+            return [
+                'cookiesCheck' => true,
+                'AccountName' => $data["nickname"],
+                'AccountFirstName' => $data["firstname"],
+                'AccountLastName' => $data["lastname"],
+                'AccountAge' => $data["age"],
+                'AccountSearchResult' => $data['searchResult'],
+            ];
+        }else{
+            return [
+                'cookiesCheck' => false,
+                'AccountName' => false,
+                'AccountFirstName' => false,
+                'AccountLastName' => false,
+                'AccountAge' => false,
+                'AccountSearchResult' => false,
+            ];
+        }
+
     }
 }

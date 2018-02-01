@@ -7,6 +7,15 @@ class LoginController extends BaseController
 {
     public function login(){
         $this->template = 'loginWindow.html';
+        $userChecked = false;
+        if(isset($_COOKIE['user'])) {
+            $userCookie = explode(',),', base64_decode($_COOKIE['user']));
+            $userChecked = $this->loginModel->cookiesCheck($userCookie[0],$userCookie[1]);
+        }
+        if($userChecked){
+            header("Location: /account/$userCookie[0]");
+        }
+
         return [
             'loginError' => false,
         ];
@@ -21,6 +30,9 @@ class LoginController extends BaseController
         $loginError = false;
         if($nickname && $password){
            if($this->loginModel->loginCheck($nickname,$password)){
+               $userCookie = base64_encode(implode(',),',array($nickname,md5($password))));
+
+               setcookie("user", $userCookie, time()+3600);
                header("Location: /account/$nickname");
                exit;
            }else{

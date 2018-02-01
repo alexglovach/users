@@ -14,4 +14,12 @@ class LoginModel extends BaseModel
         $stmt->execute();
         return $stmt->fetchAll()[0][0];
     }
+    function cookiesCheck($nickname,$passwordHash){
+        $stmt = $this->connection->prepare("SELECT EXISTS(SELECT * FROM `userSecurity` WHERE `nickname` = :nickname AND 
+`password` = :password)");
+        $stmt->bindParam(':nickname',$nickname);
+        $stmt->bindParam(':password',$passwordHash);
+        $stmt->execute();
+        return $stmt->fetchAll()[0][0];
+    }
 }
