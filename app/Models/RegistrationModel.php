@@ -7,7 +7,7 @@ class RegistrationModel extends BaseModel
 {
     public function haveNickname($nickname)
     {
-        $stmt = $this->connection->prepare("SELECT EXISTS(SELECT * FROM `users_table` WHERE `nickname` = :nickname)");
+        $stmt = $this->connection->prepare("SELECT EXISTS(SELECT * FROM `userData` WHERE `nickname` = :nickname)");
         $stmt->bindParam(':nickname',$nickname);
         $stmt->execute();
         return $stmt->fetchAll()[0][0];
@@ -18,8 +18,10 @@ class RegistrationModel extends BaseModel
         $md5Pass = md5($password);
         $stmt = $this->
         connection->
-        prepare('INSERT INTO `users_table` (`firstname`,`lastname`,`age`,`nickname`,`password`) 
-                  VALUES (:firstname, :lastname, :age, :nickname, :password)');
+        prepare('INSERT INTO `userSecurity` (`nickname`,`password`) 
+                  VALUES (:nickname, :password);
+                 INSERT INTO `userData` (`firstname`,`lastname`,`age`,`nickname`) 
+                  VALUES (:firstname, :lastname, :age, :nickname);');
         $stmt->bindParam(':firstname',$firstname);
         $stmt->bindParam(':lastname',$lastname);
         $stmt->bindParam(':age',$age);

@@ -10,4 +10,25 @@
         <input type="text" name="search" class="form-control" placeholder="Search Account:" style="width: 100%; margin-bottom: 15px;">
         <input class="btn btn-primary" type="submit" value="Search">
     </form>
+    <hr>
+    {% if AccountSearchResult %}
+    <h3>Search results:</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Nickname</th>
+            <th>FirstName</th>
+            <th>Lastname</th>
+            <th>Age</th>
+        </tr>
+        {% for AccountSearchResultRow in AccountSearchResult %}
+        <tr>
+            <td>{{ AccountSearchResultRow.nickname }}</td>
+            <td>{{ AccountSearchResultRow.firstname }}</td>
+            <td>{{ AccountSearchResultRow.lastname }}</td>
+            <td>{{ AccountSearchResultRow.age }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    {% endif %}
 </div>
